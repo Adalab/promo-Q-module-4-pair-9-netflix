@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const movies = require("./data/movies.json");
+
 // create and config server
 const server = express();
 server.use(cors());
@@ -12,6 +13,9 @@ server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
 //endpoint
+server.get("/movie/:movieId", (req, res) => {
+  console.log(req.params);
+});
 
 server.get("/movies", (req, resp) => {
   const responseSuccesse = {

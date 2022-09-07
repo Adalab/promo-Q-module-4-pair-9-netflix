@@ -38,14 +38,14 @@ Por favor marca a continuación los ejericios que hayais terminado:
 
 4.3 Express JS II:
 
-- [ ] 1. Servidor de estáticos para React
+- [X] 1. Servidor de estáticos para React
 - [ ] 2. Servidor de estáticos para las fotos
 - [ ] 3. Peticiones POST con body params
 - [ ] 4. Mantener logada a la usuaria
 
 4.4 Express JS III:
 
-- [ ] 1. Obtener el id de la película a renderizar
+- [X ] 1. Obtener el id de la película a renderizar
 - [ ] 2. Obtener la película
 - [ ] 3. Renderiza una página cualquiera
 - [ ] 4. Renderiza la película
