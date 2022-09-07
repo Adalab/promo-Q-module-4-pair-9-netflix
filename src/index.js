@@ -16,16 +16,15 @@ server.listen(serverPort, () => {
 
 server.get("/movies", (req, resp) => {
   const genderFilterParam = req.query.gender;
-  const moviesFilter = movies.filter((item) => {
-    if (item.gender === genderFilterParam) {
-      console.log("bien hecho, guapi");
-    }
-  });
+  const moviesFilter = movies.filter((item) =>
+    genderFilterParam ? item.gender === genderFilterParam : true
+  );
+  console.log("adiós", moviesFilter);
   const responseSuccesse = {
     success: true,
-    movies: movies,
+    movies: moviesFilter,
   };
-  console.log(req.params);
+
   resp.json(responseSuccesse);
 });
 //consigue id de la peli a renderizar
