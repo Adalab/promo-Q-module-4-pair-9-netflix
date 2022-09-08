@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+
 const movies = require("./data/movies.json");
+const Database = require("better-sqlite3/lib/database");
+
+const db = new Database("./src/database.db", { verbose: console.log });
 
 // create and config server
 const server = express();
@@ -15,7 +19,12 @@ server.listen(serverPort, () => {
 //endpoint
 
 server.get("/movies", (req, resp) => {
-  const genderFilterParam = req.query.gender;
+  const query = db.prepare("SELECT * FROM movies WHERE gender = ?");
+  const gender = req.query.gender;
+  const allMovies = query.all(gender);
+  console.log(allMovies);
+  resp.json({ success: true, movies: allMovies });
+  /* const genderFilterParam = req.query.gender;
   const moviesFilter = movies.filter((item) =>
     genderFilterParam ? item.gender === genderFilterParam : true
   );
@@ -25,7 +34,7 @@ server.get("/movies", (req, resp) => {
     movies: moviesFilter,
   };
 
-  resp.json(responseSuccesse);
+  resp.json(responseSuccesse); */
 });
 //consigue id de la peli a renderizar
 
