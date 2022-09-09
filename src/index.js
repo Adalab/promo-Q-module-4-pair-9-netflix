@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const movies = require("./data/movies.json");
 const Database = require("better-sqlite3/lib/database");
+const { response } = require("express");
 
 const db = new Database("./src/database.db", { verbose: console.log });
 
@@ -17,7 +18,17 @@ server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
 //endpoint
-
+server.post("/sign-up", (req, res) => {
+  const email = req.body.email;
+  const signUp = req.body.password;
+  res.json({
+    success: true,
+    userId: singUp,
+  });
+  const query = db.prepare(UPDATE users
+    )
+  ;
+});
 server.get("/movies", (req, resp) => {
   const query = db.prepare("SELECT * FROM movies WHERE gender = ?");
   const gender = req.query.gender;
