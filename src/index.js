@@ -18,17 +18,26 @@ server.listen(serverPort, () => {
   console.log(`Server listening at http://localhost:${serverPort}`);
 });
 //endpoint
-server.post("/sign-up", (req, res) => {
-  const email = req.body.email;
-  const signUp = req.body.password;
+server.post("/signUp", (req, res) => {
+  const querySearch = db.prepare("SELECT * FROM users WHERE email=?");
+  const userFound = querySearch.get(req.body.email);
+  console.log(userFound);
+  if (userFound != undefined) {
+    resp.json({
+      success: false,
+      errorMessage: "Usuario ya existente",
+    });
+  } else {
+  }
+
+  const query = db.prepare("INSERT INTO users (email, password) VALUES (?,?)");
+  const result = query.run(req.body.email, req.body.password);
   res.json({
     success: true,
-    userId: singUp,
+    userId: result.id,
   });
-  const query = db.prepare(UPDATE users
-    )
-  ;
 });
+
 server.get("/movies", (req, resp) => {
   const query = db.prepare("SELECT * FROM movies WHERE gender = ?");
   const gender = req.query.gender;
