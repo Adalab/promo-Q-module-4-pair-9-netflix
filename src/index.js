@@ -23,7 +23,7 @@ server.post("/signUp", (req, res) => {
   const userFound = querySearch.get(req.body.email);
   console.log(userFound);
   if (userFound != undefined) {
-    resp.json({
+    res.json({
       success: false,
       errorMessage: "Usuario ya existente",
     });
